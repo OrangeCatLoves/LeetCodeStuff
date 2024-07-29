@@ -9,7 +9,7 @@ class Solution {
         return this.result;
     }
 
-    public void Helper(int n, int index, boolean[] isUsed) {
+    private void Helper(int n, int index, boolean[] isUsed) {
         if (index == n + 1) {
             System.out.println("A");
             this.result++;
