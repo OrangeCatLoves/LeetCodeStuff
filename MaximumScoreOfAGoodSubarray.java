@@ -56,4 +56,30 @@ public class Solution {
 
         return max_score;
     }
+    /*
+    public int maximumScore(int[] nums, int k) {
+        int maxScore = nums[k];
+        int minValue = nums[k];
+        int left = k;
+        int right = k;
+        while (left >= 0 && right < nums.length) {
+            minValue = Math.min(minValue, Math.min(nums[left], nums[right]));
+            maxScore = Math.max(minValue * (right - left + 1), maxScore);
+            //have to check edge cases first, otherwise the loop will break earlier rather than check through all elements.
+            if (left == 0 && right < nums.length) {
+                //edge case on the left
+                right++;
+            } else if (right == nums.length - 1 && left >= 0) {
+                //edge case on the right
+                left--;
+            } else if (nums[right + 1] > nums[left -1]) {
+                //if right side is bigger than left side then move right.
+                right++;
+            } else {
+                //otherwise move left.
+                left--;
+            }
+        }
+        return maxScore;
+    }*/
 }
