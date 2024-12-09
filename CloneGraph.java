@@ -67,3 +67,57 @@ class Solution {
         }
     }
 }
+
+// Python3 version
+from collections import defaultdict
+from typing import List
+
+# Definition for a Node
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+
+class Solution:
+    def __init__(self):
+        self.firstNode = None
+        self.currNodeInDfs = None
+
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        if not node:
+            return None
+        
+        uniqueNodes = {}
+        visited = set()
+        self.dfs(node, uniqueNodes, visited)
+        return self.firstNode
+
+    def dfs(self, node: 'Node', uniqueNodes: dict, visited: set):
+        print("1")
+        if node.val not in visited:
+            visited.add(node.val)
+
+            if node.val not in uniqueNodes:
+                self.currNodeInDfs = Node(node.val)
+                uniqueNodes[node.val] = self.currNodeInDfs
+            else:
+                self.currNodeInDfs = uniqueNodes[node.val]
+            
+            neighbors = node.neighbors
+            for neighbor in neighbors:
+                if neighbor.val not in uniqueNodes:
+                    n = Node(neighbor.val)
+                    uniqueNodes[neighbor.val] = n
+                    self.currNodeInDfs.neighbors.append(n)
+                else:
+                    n = uniqueNodes[neighbor.val]
+                    self.currNodeInDfs.neighbors.append(n)
+            
+            if node.val == 1:
+                self.firstNode = uniqueNodes[1]
+            
+            # Create a copy of neighbors to avoid concurrent modification
+            neighbors_copy = list(neighbors)
+            for neighbor in neighbors_copy:
+                self.dfs(neighbor, uniqueNodes, visited)
+                    
