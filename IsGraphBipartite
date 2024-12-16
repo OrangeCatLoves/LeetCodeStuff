@@ -80,3 +80,31 @@ class Solution {
         return true; // All components are bipartite
     }
 }
+
+// Python Soluton
+from queue import Queue
+
+class Solution:
+    def isBipartite(self, graph: List[List[int]]) -> bool:
+        n = len(graph)
+        color = [0] * n
+        queue = Queue()
+
+        for i in range (n): 
+            if (color[i] != 0):
+                continue
+            color[i] = 1
+            queue.put(i)
+
+            while not queue.empty():
+                currNode = queue.get()
+                neighbors = graph[currNode]
+                for neighbor in neighbors:
+                    if (color[neighbor] == 0):
+                        color[neighbor] = -color[currNode]
+                        queue.put(neighbor)
+                    elif (color[neighbor] == color[currNode]):
+                        return False
+
+        return True
+
