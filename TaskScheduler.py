@@ -24,7 +24,7 @@ class Solution:
             
             # The elements at the front of the queue should have a timer == cooldown[0][1]
             # When the task coolsdown eventually
-            while cooldown and cooldown[0][1] == timer:
+            if cooldown and cooldown[0][1] == timer:
                 task_count = cooldown[0][0]
                 cooldown.popleft()
                 heapq.heappush(heap, -task_count)
