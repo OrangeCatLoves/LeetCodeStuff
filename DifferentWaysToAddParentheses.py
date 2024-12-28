@@ -1,0 +1,24 @@
+"""
+The solution intends to work like this: It recursively splits the expression into 2 parts, each part returning a list which contains all possible values obtained from computation based on each 2 parts, then a for loop is used to calculate each possible value and append them to the list which is the final answer. On a higher level POV: Backtracking is deployed whereby every path is considered.
+"""
+
+class Solution:
+    operations = {
+        "+" : lambda x, y: x + y,
+        "-" : lambda x, y: x - y,
+        "*" : lambda x, y: x * y
+    }
+    def diffWaysToCompute(self, expression: str) -> List[int]:
+        res = []
+        for i in range(len(expression)):
+            op = expression[i]
+            if op in self.operations:
+                nums1 = self.diffWaysToCompute(expression[:i])
+                nums2 = self.diffWaysToCompute(expression[i + 1:])
+                for n1 in nums1:
+                    for n2 in nums2:
+                        res.append(self.operations[op](n1, n2))
+        if res == []:
+            res.append(int(expression))
+        return res
+        
