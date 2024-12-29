@@ -17,6 +17,24 @@ class Solution:
         
         return dp[len1][len2]
 
+# Space optimised to O(N) only since at every point in your calculation
+# You only need the previous and current row in your dp
+
+class Solution:
+    def longestPalindromeSubseq(self, s: str) -> int:
+        n = len(s)
+        dp, dpPrev = [0] * n, [0] * n
+        for i in range(n - 1, -1, -1):
+            dp[i] = 1
+            for j in range(i+1, n):
+                if s[i] == s[j]:
+                    dp[j] = dpPrev[j - 1] + 2
+                else:
+                    dp[j] = max(dpPrev[j], dp[j - 1])
+            dp, dpPrev = dpPrev, dp
+
+        return dpPrev[n - 1]
+
 
 
         
