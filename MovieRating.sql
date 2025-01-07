@@ -15,10 +15,10 @@ UNION ALL
 
 (SELECT title as results
 FROM
-    (SELECT movie_id, title, AVG(rating) avg_rating
+    (SELECT title, AVG(rating) avg_rating
     FROM MovieRating LEFT JOIN Movies USING (movie_id)
     WHERE to_char(created_at, 'YYYY-MM') = '2020-02'
-    GROUP BY movie_id, title) movies_
+    GROUP BY title) movies_
 ORDER BY avg_rating DESC, title
 LIMIT 1)
 
