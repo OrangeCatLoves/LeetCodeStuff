@@ -1,4 +1,5 @@
 -- Write your PostgreSQL query statement below
+-- Could only pass 6/10 testcases
 -- SELECT
 --     COALESCE(salary, NULL) as SecondHighestSalary
 -- FROM Employee
@@ -14,3 +15,4 @@ SELECT
          LIMIT 1), 
         NULL
     ) AS SecondHighestSalary;
+
